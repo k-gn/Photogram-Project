@@ -19,6 +19,6 @@ public class HttpResponseJsonController {
 		User user = new User();
 		user.setUsername("홍길동");
 		// 자동으로 json 형태로 리턴된다.
-		return user; // 1. MessageConverter가 자동으로 JavaObject를 Json으로 변경해서 응답해준다.
+		return user; // 1. MessageConverter (objectMapper) 가 자동으로 JavaObject를 Json으로 변경해서 응답해준다.
 	}						// 2. RestController 일 때만 작동한다.
 }
