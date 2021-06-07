@@ -1,3 +1,5 @@
+# yml 파일은 어떻게 스프링을 만들건지 정의하는 파일
+
 server:
   port: 8080
   servlet:
@@ -6,8 +8,9 @@ server:
       charset: utf-8
       enabled: true
     
+# 뷰 리졸버
 spring:
-  mvc:
+  mvc: 
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
@@ -19,11 +22,11 @@ spring:
     password: cos1234
     
   jpa:
-    open-in-view: true
+    open-in-view: true # 영속 영역을 프레젠테이션까지 설정
     hibernate:
       ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      naming: 
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # 변수명으로 컬럼을 만들어 준다.
     show-sql: true
       
   servlet:
@@ -37,4 +40,4 @@ spring:
       password: 1234   
 
 file:
-  path: C:/workspace/springbootwork/upload/
+  path: C:/upload
