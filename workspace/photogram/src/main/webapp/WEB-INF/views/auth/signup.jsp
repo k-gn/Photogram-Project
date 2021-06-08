@@ -26,11 +26,13 @@
                          <!--로고end-->
                          
                          <!--회원가입 인풋-->
-                        <form class="login__input" >
+                         <!-- 왜 그냥하면 안되나? => post 요청 시 csrf 토큰이 필요 -  spring security 는 기본적으로 csrf 토큰 검사를 한다. -->
+                        <form class="login__input"  action="/auth/signup" method="post">
                             <input type="text" name="username" placeholder="유저네임" required="required" />
                             <input type="password" name="password" placeholder="패스워드" required="required" />
                             <input type="email" name="email" placeholder="이메일" required="required" />
                             <input type="text" name="name" placeholder="이름" required="required" />
+                            <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
                             <button>가입</button>
                         </form>
                         <!--회원가입 인풋end-->
