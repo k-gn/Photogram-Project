@@ -2,6 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<!-- 시큐리티 태그 라이브러리로 세션 정보 담기 -->
+<sec:authorize access="isAuthenticated()"> 
+	<!-- property='principal' 로 인증(세션) 정보 (= UserDetails) 에 접근 가능 -> principal 변수에 담기 -->
+	<sec:authentication property="principal" var="principal"/> 
+</sec:authorize>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,18 +38,18 @@
 	
 	<header class="header">
 		<div class="container">
-			<a href="/image/story" class="logo">
+			<a href="/" class="logo">
 				<img src="/images/logo.jpg" alt="">
 			</a>
 			<nav class="navi">
 				<ul class="navi-list">
-					<li class="navi-item"><a href="/image/story">
+					<li class="navi-item"><a href="/">
 							<i class="fas fa-home"></i>
 						</a></li>
 					<li class="navi-item"><a href="/image/popular">
 							<i class="far fa-compass"></i>
 						</a></li>
-					<li class="navi-item"><a href="/user/profile">
+					<li class="navi-item"><a href="/user/1">
 							<i class="far fa-user"></i>
 						</a></li>
 				</ul>

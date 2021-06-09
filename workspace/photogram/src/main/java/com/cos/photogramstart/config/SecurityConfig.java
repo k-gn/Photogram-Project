@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.loginPage("/auth/signin")
 				.loginProcessingUrl("/auth/signin") // POST -> 스프링 시큐리티가 로그인 프로세스 진행.
-				.defaultSuccessUrl("/");
+				.defaultSuccessUrl("/"); // true를 추가하면 로그인 성공 시 무조건 / 로 이동하고 안하면 이전 접근 페이지로 이동한다. (단. LoginSuccessHandler가 따로 없을 경우)
 		
 		http.csrf().disable(); 
 	}

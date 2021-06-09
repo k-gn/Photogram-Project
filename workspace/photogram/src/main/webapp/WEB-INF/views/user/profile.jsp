@@ -101,8 +101,8 @@
 <!--로그아웃, 회원정보변경 모달-->
 <div class="modal-info" onclick="modalInfo()">
 	<div class="modal">
-		<button onclick="location.href='/user/update'">회원정보 변경</button>
-		<button onclick="location.href='/logout'">로그아웃</button>
+		<button onclick="location.href='/user/1/update'">회원정보 변경</button>
+		<button onclick="location.href='/logout'">로그아웃</button> <!-- 기본적으로 /logout 요청 시 시큐리티가 로그아웃 처리를 알아서 해준다. -->
 		<button onclick="closePopup('.modal-info')">취소</button>
 	</div>
 </div>

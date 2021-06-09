@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class User {
 
-	@Id
+	@Id // PK
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략
 	private Integer id; // 대형 프로그램이 아니라 그냥 int 로 해도 충분하다.
 	
