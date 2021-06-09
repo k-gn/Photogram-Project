@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// super.configure(http); // 애 때문에 기본적으로 시큐리티가 제공하는 로그인화면이 뜬다, 삭제 시 기존 시큐리티가 가지고 있는 기능이 비활성화된다.
 		
 		http.authorizeRequests()
-			.antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**").authenticated()
+			.antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**", "/api/**").authenticated()
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()

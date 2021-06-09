@@ -45,7 +45,7 @@ public class User {
 	
 	private LocalDateTime createDate;
 	
-	@PrePersist // DB 에 INSERT 직전에 자동으로 실행된다.
+	@PrePersist // DB 에 INSERT 직전에 자동으로 실행된다. (nativeQuery 같은 걸 쓸 땐 동작 x)
 	public void createDate() {
 		this.createDate = LocalDateTime.now();
 	}
