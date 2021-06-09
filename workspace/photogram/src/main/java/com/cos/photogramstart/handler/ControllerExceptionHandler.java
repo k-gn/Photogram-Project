@@ -2,6 +2,8 @@ package com.cos.photogramstart.handler;
 
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +27,8 @@ public class ControllerExceptionHandler {
 	
 	// 데이터를 리턴
 	@ExceptionHandler(CustomValidationApiException.class)
-	public CMRespDto<?> validationApiException(CustomValidationApiException e) {
-		return new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()); 
+	public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
+		return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST); 
 	}
 	
 //	@ExceptionHandler(CustomValidationException.class)

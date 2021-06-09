@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -28,7 +30,7 @@ public class UserApiController {
 	private final UserService userService;
 	
 	@PutMapping("/api/user/{id}")
-	public CMRespDto<?> update(
+	public ResponseEntity<?> update(
 			@PathVariable int id, 
 			@Valid UserUpdateDto dto, 
 			BindingResult bindingResult, // 꼭 @Valid 다음에 파라미터로 적어야 동작한다.
@@ -44,7 +46,7 @@ public class UserApiController {
 		}else {
 			User userEntity = userService.update(id, dto.toEntity());
 			principalDetails.setUser(userEntity);
-			return new CMRespDto<>(1, "회원수정완료", userEntity);
+			return new ResponseEntity<>(new CMRespDto<>(1, "회원수정완료", userEntity), HttpStatus.OK);
 		}
 	}
 }
