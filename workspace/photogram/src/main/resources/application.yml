@@ -22,7 +22,7 @@ spring:
     password: cos1234
     
   jpa:
-    open-in-view: true # 영속 영역을 프레젠테이션까지 설정
+    open-in-view: true # 영속 영역을 프레젠테이션(view)까지 설정
     hibernate:
       ddl-auto: update
       naming: 
