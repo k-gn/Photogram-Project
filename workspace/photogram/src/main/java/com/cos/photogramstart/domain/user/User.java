@@ -56,7 +56,7 @@ public class User {
 	// LAZY : User를 SELECT 할 때 해당 User id 로 등록된 image를 다 가져오지마! -> 대신 image가 호출될 때 가져와!
 	// EAGER = User를 SELECT 할 때 해당 User id 로 등록된 image를 조인해서 전부 가져와!
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({"user"}) // 해당 컬럼을 JSON 으로 파싱하지 않는다. (무한참조 방지)
+	@JsonIgnoreProperties({"user"}) // 해당 컬럼을 JSON 으로 파싱하지 않는다. (get 무한참조 방지)
 	private List<Image> images;
 	
 	private LocalDateTime createDate;

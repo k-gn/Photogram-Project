@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.photogramstart.domain.subscribe.SubscribeRepository;
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomException;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
 	private final UserRepository userRepository;
+	private final SubscribeRepository subscribeRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
 	
 	// 영속성 컨텍스트는 Service가 끝나는 시점에 변경된 오브젝트를 감지한 후 DB에 자동 flush (더티체킹)
@@ -25,11 +27,15 @@ public class UserService {
 	public UserProfileDto userProfile(int pageUserId, int principalId) {
 		// SELECT * FROM image WHERE userId = :userId; 
 		User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지 입니다."));
+		int subscribeState = subscribeRepository.mSubscribeState(principalId, pageUserId);
+		int subscribeCount = subscribeRepository.mSubscribeCount(pageUserId);
 		
 		UserProfileDto dto = UserProfileDto.builder()
 				.user(userEntity)
 				.pageOwner(pageUserId == principalId) // 1은 페이지 주인, -1은 주인이 아님
 				.imageCount(userEntity.getImages().size())
+				.subscribeCount(subscribeCount)
+				.subscribeState(subscribeState == 1)
 				.build();
 		
 		return dto;
