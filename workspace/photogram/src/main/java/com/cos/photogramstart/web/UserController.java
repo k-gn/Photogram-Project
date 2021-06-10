@@ -1,5 +1,6 @@
 package com.cos.photogramstart.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +11,10 @@ import com.cos.photogramstart.config.auth.PrincipalDetails;
 @Controller
 public class UserController {
 
+	@PreAuthorize("#id == principal.user.id")
 	@GetMapping("/user/{id}")
 	public String profile(@PathVariable int id) {
+		System.out.println(id);
 		return "user/profile";
 	}
 

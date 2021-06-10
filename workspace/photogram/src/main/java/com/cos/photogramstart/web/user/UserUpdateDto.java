@@ -23,7 +23,6 @@ public class UserUpdateDto {
 	
 	private String gender;
 	
-	// 조금 위험, 코드 수정 필요할 예정 -> validation 체크 필요!
 	public User toEntity() {
 		return User.builder()
 				.name(name)

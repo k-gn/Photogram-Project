@@ -18,7 +18,8 @@
                 <!--사진업로드 로고 end-->
                 
                 <!--사진업로드 Form-->
-                <form class="upload-form" >
+                <!-- multipart/form-data : 여러 종류 타입을 묶어서 전송할 때 사용하는 타입 -->
+                <form class="upload-form" action="/image"  method="post" enctype="multipart/form-data"> 
                     <input  type="file" name="file"  onchange="imageChoose(this)"/>
                     <div class="upload-img">
                         <img src="/images/person.jpeg" alt="" id="imageUploadPreview" />
