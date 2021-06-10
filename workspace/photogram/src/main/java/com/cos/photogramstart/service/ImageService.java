@@ -27,7 +27,7 @@ public class ImageService {
 
 	private final ImageRepository imageRepository;
 	
-	@Transactional
+	@Transactional // 일의 최소 단위, DB에 변형을 주는 일을 할 때 붙여주는 습관을 들이자
 	public void upload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
 		
 		UUID uuid = UUID.randomUUID(); // 파일 구분을 위한 값 (유일성이 보장된 암호)

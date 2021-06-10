@@ -18,6 +18,9 @@ public class UserService {
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder passwordEncoder;
 	
+	// 영속성 컨텍스트는 Service가 끝나는 시점에 변경된 오브젝트를 감지한 후 DB에 자동 flush (더티체킹)
+	// readOnly = true -> 변경감지를 안함 -> 예상치 못한 엔티티의 등록, 변경, 삭제를 예방 + 성능향상 (조회 기능만 가능)
+	@Transactional(readOnly = true)
 	public User userProfile(int userId) {
 		// SELECT * FROM image WHERE userId = :userId; 
 		User userEntity = userRepository.findById(userId).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지 입니다."));

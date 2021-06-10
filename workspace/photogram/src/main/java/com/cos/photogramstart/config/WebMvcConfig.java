@@ -12,6 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer { // Web 설정 파일
 	@Value("${file.path}")
 	private String uploadFolder;
 	
+	// 정적인 데이터를 서빙하는 역할을하는 리소스 핸들러
 	@Override
 		public void addResourceHandlers(ResourceHandlerRegistry registry) {
 			WebMvcConfigurer.super.addResourceHandlers(registry);
