@@ -8,6 +8,7 @@ import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.web.user.UserProfileDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,10 +22,17 @@ public class UserService {
 	// 영속성 컨텍스트는 Service가 끝나는 시점에 변경된 오브젝트를 감지한 후 DB에 자동 flush (더티체킹)
 	// readOnly = true -> 변경감지를 안함 -> 예상치 못한 엔티티의 등록, 변경, 삭제를 예방 + 성능향상 (조회 기능만 가능)
 	@Transactional(readOnly = true)
-	public User userProfile(int userId) {
+	public UserProfileDto userProfile(int pageUserId, int principalId) {
 		// SELECT * FROM image WHERE userId = :userId; 
-		User userEntity = userRepository.findById(userId).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지 입니다."));
-		return userEntity;
+		User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> new CustomException("해당 프로필 페이지는 없는 페이지 입니다."));
+		
+		UserProfileDto dto = UserProfileDto.builder()
+				.user(userEntity)
+				.pageOwner(pageUserId == principalId) // 1은 페이지 주인, -1은 주인이 아님
+				.imageCount(userEntity.getImages().size())
+				.build();
+		
+		return dto;
 	}
 	
 	@Transactional
