@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,7 +48,24 @@ public class ImageService {
 		imageRepository.save(image);
 		
 	}
+
+	// @Transactional : 영속성 세션 영역을 컨트롤러단 영역까지 유지시킬 수 있는 기능도 있다.
+	@Transactional(readOnly = true) // 영속성 컨텍스트 변경 감지를 해서, 더티체킹, flush(반영) X
+	public Page<Image> imageStory(int principalId, Pageable pageable){
+		Page<Image> images = imageRepository.mStory(principalId, pageable);
+		
+		images.forEach(image -> {
+			image.setLikeCount(image.getLikes().size());
+			image.getLikes().forEach(like -> {
+				if(like.getUser().getId() == principalId) { // 해당 이미지에 내가 좋아요를 했다면
+					image.setLikeState(true);
+				}
+			});
+		});
+		
+		return images;
+	}
 	
-	
+	// 테이블 삭제 시 연관관계가 있다면 자식테이블 부터 삭제해야 한다.
 	
 }
