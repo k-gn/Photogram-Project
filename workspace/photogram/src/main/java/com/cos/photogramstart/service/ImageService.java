@@ -3,6 +3,7 @@ package com.cos.photogramstart.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -64,6 +65,11 @@ public class ImageService {
 		});
 		
 		return images;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Image> popular() {
+		return imageRepository.mPopular();
 	}
 	
 	// 테이블 삭제 시 연관관계가 있다면 자식테이블 부터 삭제해야 한다.

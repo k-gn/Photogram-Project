@@ -86,8 +86,15 @@ function getSubscribeModalItem(u) {
 
 
 // (3) 유저 프로파일 사진 변경 (완)
-function profileImageUpload() {
+function profileImageUpload(pageUserId, principalId) {
+	
+	if(pageUserId !== principalId) {
+		alert("프로필 사진을 수정할 수 없는 유저입니다.");
+		return;	
+	}
+	
 	$("#userProfileImageInput").click();
+	
 
 	$("#userProfileImageInput").on("change", (e) => {
 		let f = e.target.files[0];
@@ -97,12 +104,32 @@ function profileImageUpload() {
 			return;
 		}
 
-		// 사진 전송 성공시 이미지 변경
-		let reader = new FileReader();
-		reader.onload = (e) => {
-			$("#userProfileImage").attr("src", e.target.result);
-		}
-		reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+		// 서버에 프로필 이미지 전송
+		let profileImageForm = $("#userProfileImageForm")[0];
+		
+		// FormData 객체를 이용하면 form 태그의 필드와 그 값을 나타내는 일련의 key/value 쌍을 담을 수 있다. + 파일, 이미지 등 다양하게 전송할 목적
+		let formData = new FormData(profileImageForm);
+		
+		// Ajax로 multipart/form-data 요청 보내기 
+		$.ajax({
+			type: "put",
+			url: `/api/user/${principalId}/profileImageUrl`,
+			data: formData,
+			contentType: false, // 필수 : x-www-form-urlencoded로 파싱되는것을 방지
+			processData: false, // 필수 : contentType: false 일 때 QueryString 이 자동으로 설정되는 것을 해제
+			enctype: "multipart/form-data",
+			dataType: "json"
+		}).done(res => {
+			// 사진 전송 성공시 이미지 변경
+			let reader = new FileReader();
+			reader.onload = (e) => {
+				$("#userProfileImage").attr("src", e.target.result);
+			}
+			reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+		}).fail(error => {
+			console.log(error);
+		});
+		
 	});
 }
 
