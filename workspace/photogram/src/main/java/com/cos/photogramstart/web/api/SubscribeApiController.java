@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
+import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.service.SubscribeService;
 import com.cos.photogramstart.web.dto.CMRespDto;
 
@@ -24,8 +25,12 @@ public class SubscribeApiController {
 	// 구독하기
 	@PostMapping("/api/subscribe/{toUserId}")
 	public ResponseEntity<?> subscribe(@AuthenticationPrincipal PrincipalDetails principalDedetails, @PathVariable int toUserId) {
-		subscribeService.subscribe(principalDedetails.getUser().getId(), toUserId);
-		return new ResponseEntity<>(new CMRespDto<>(1, "구독하기 성공!", null), HttpStatus.OK);
+		if(principalDedetails.getUser().getId() == toUserId) {
+			throw new CustomApiException("올바르지 않은 구독 요청입니다.");
+		}else {
+			subscribeService.subscribe(principalDedetails.getUser().getId(), toUserId);
+			return new ResponseEntity<>(new CMRespDto<>(1, "구독하기 성공!", null), HttpStatus.OK);
+		}
 	}
 	
 	// 구독 취소하기

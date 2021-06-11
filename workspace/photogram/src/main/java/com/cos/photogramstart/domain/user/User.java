@@ -51,7 +51,7 @@ public class User {
 	private String role; // 권한
 	
 	// # 양방향 매핑
-	// mappedBy : 나는 연관관계의 주인이 아니다. 그러므로 테이블에 컬럼을 만들지마!
+	// mappedBy : 나는 연관관계의 주인이 아니다. 그러므로 테이블에 컬럼을 만들지마! + 관계의 주인이 아닌쪽은 readOnly (images 조회만 가능) 
 	// User를 SELECT 할 때 해당 User id 로 등록된 image를 다 가져와!
 	// LAZY : User를 SELECT 할 때 해당 User id 로 등록된 image를 다 가져오지마! -> 대신 image가 호출될 때 가져와!
 	// EAGER = User를 SELECT 할 때 해당 User id 로 등록된 image를 조인해서 전부 가져와!
