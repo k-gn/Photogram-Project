@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+// 여러 데이터가 모여져서 만들어지면 오브젝트(테이블) 로 만들어야 한다.
 
 // JPA - Java Persistence API (자바로 데이터를 영구적으로 저장할 수 있는 api)
 @Entity // DB 에 테이블을 생성

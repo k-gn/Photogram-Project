@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
+import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.likes.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -55,6 +57,10 @@ public class Image {
 	private int likeCount;
 	
 	// 댓글
+	@OrderBy("id DESC") // 정렬 어노테이션
+	@JsonIgnoreProperties({"image"})
+	@OneToMany(mappedBy = "image")
+	private List<Comment> comments;
 
 	private LocalDateTime createDate;
 
