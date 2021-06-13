@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -44,11 +45,13 @@ public class Likes {
 	
 	@JoinColumn(name = "imageId")
 	@ManyToOne
+	@ToString.Exclude
 	private Image image;
 	
 	@JsonIgnoreProperties({"images"})
 	@JoinColumn(name = "userId")
 	@ManyToOne
+	@ToString.Exclude
 	private User user;
 	
 	private LocalDateTime createDate;

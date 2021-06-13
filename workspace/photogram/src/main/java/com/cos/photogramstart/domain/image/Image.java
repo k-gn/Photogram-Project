@@ -50,6 +50,7 @@ public class Image {
 	// 이미지 좋아요
 	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image")
+	@ToString.Exclude
 	private List<Likes> likes;
 	@Transient // DB 에 컬럼이 만들어지지 않는다.
 	private boolean likeState;
@@ -60,6 +61,7 @@ public class Image {
 	@OrderBy("id DESC") // 정렬 어노테이션
 	@JsonIgnoreProperties({"image"})
 	@OneToMany(mappedBy = "image")
+	@ToString.Exclude
 	private List<Comment> comments;
 
 	private LocalDateTime createDate;

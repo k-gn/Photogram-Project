@@ -19,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity 
 @Data
@@ -41,10 +42,12 @@ public class Subscribe {
 
 	@ManyToOne 
 	@JoinColumn(name = "fromUserId") // 해당하는 객체를 참조하는 외래키를 해당 name명으로 만들어 준다.
+	@ToString.Exclude
 	private User fromUser; // 구독하는 사람
 	
 	@ManyToOne
 	@JoinColumn(name = "toUserId")
+	@ToString.Exclude
 	private User toUser; // 구독받는 사람
 
 	private LocalDateTime createDate;

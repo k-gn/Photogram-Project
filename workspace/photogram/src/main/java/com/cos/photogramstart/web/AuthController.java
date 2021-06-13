@@ -43,18 +43,9 @@ public class AuthController {
 	public String signup(@Valid SignupDto dto, BindingResult bindingResult) {
 		// @Valid 체크 후 문제가 생기면 BindingResult 로 매핑(getFieldErrors)된다.
 		
-		if(bindingResult.hasErrors()) {
-			Map<String, String> errMap = new HashMap<>();
-			for(FieldError error : bindingResult.getFieldErrors()) {
-				errMap.put(error.getField(), error.getDefaultMessage());
-				System.out.println(error.getDefaultMessage());
-			}
-			throw new CustomValidationException("유효성 검사 실패", errMap);
-		}else {
-			User user = dto.toEntity();
-			User userEntity = authService.signup(user);
-			System.out.println(userEntity);
-			return "auth/signin";
-		}
+		User user = dto.toEntity();
+		User userEntity = authService.signup(user);
+		System.out.println(userEntity);
+		return "auth/signin";
 	}
 }

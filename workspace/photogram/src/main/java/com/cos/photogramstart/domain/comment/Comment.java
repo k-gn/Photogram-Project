@@ -19,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity // DB 에 테이블을 생성
 @Data
@@ -38,11 +39,14 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	@JsonIgnoreProperties({"images"})
+	@ToString.Exclude
+
 	private User user;
 	
 	@ManyToOne
 	@JoinColumn(name = "imageId")
 	@JsonIgnoreProperties({"likes"})
+	@ToString.Exclude
 	private Image image;
 
 	private LocalDateTime createDate;

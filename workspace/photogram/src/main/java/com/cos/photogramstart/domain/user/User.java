@@ -28,6 +28,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = "images")
 public class User {
 
 	@Id // PK
