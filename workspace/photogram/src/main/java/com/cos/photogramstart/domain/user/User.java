@@ -35,7 +35,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략
 	private Integer id; // 대형 프로그램이 아니라 그냥 int 로 해도 충분하다.
 	
-	@Column(length = 20, nullable = false, unique = true)
+	@Column(length = 100, nullable = false, unique = true)
 	private String username;
 	@Column(nullable = false)
 	private String password;

@@ -40,11 +40,16 @@
                         <!-- 또는end -->
                         
                         <!-- Oauth 소셜로그인 -->
-                        <div class="login__facebook">
-                            <button>
+                        <!-- <div class="login__facebook">
+                            /oauth2/authorization : 기본 oauth2 경로, /facebook : yml에 설정한 registration 이름
+                            <button onclick="location.href='/oauth2/authorization/facebook'"> 
                                 <i class="fab fa-facebook-square"></i>
-                                <span>Facebook으로 로그인</span>
+                                <span>Facebook 으로 로그인</span>
                             </button>
+                        </div> -->
+                        <div class="login__facebook"> 
+                        	<a class="btn btn-lg btn-google btn-block text-uppercase btn-outline" href="javascript:location.href='/oauth2/authorization/google'">
+                        		<img src="https://img.icons8.com/color/16/000000/google-logo.png"> Signup Using Google</a> 
                         </div>
                         <!-- Oauth 소셜로그인end -->
                     </div>

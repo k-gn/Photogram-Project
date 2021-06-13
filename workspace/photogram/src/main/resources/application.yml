@@ -38,6 +38,13 @@ spring:
     user:
       name: test
       password: 1234   
+    oauth2:      client:        registration:          google:
+            client-id: 989859326516-2h28fanip9cfuvkhhgv3ud47usismhdn.apps.googleusercontent.com
+            client-secret: dWP_6kkfXFhct3OO1GXF6Wdm
+            scope:            - profile
+            - email
 
 file:
   path: C:/upload/
+  
+
