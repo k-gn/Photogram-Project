@@ -32,7 +32,8 @@ public class UserService {
 	@Value("${file.path}") // yml or properties 에 내가 만든 key 값을 가져올 수 있다.
 	private String uploadFolder;
 	
-	// 영속성 컨텍스트는 Service가 끝나는 시점에 변경된 오브젝트를 감지한 후 DB에 자동 flush (더티체킹)
+	// 영속성 컨텍스트에서 데이터가 유지되는 범위와 실제 DB에 데이터의 관리 범위를(적용 시점) 생각해보자
+	// 영속성 컨텍스트는 Service가 끝나는 시점에 변경된 오브젝트를 감지한 후 DB에 자동 flush (더티체킹) - @Transactional 필요
 	// readOnly = true -> 변경감지를 안함 -> 예상치 못한 엔티티의 등록, 변경, 삭제를 예방 + 성능향상 (조회 기능만 가능)
 	@Transactional(readOnly = true)
 	public UserProfileDto userProfile(int pageUserId, int principalId) {
