@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +19,9 @@ public class AuthService {
 	
 	@Transactional // Write(insert, update, delete)
 	public User signup(User user) {
+		
+		User present =  userRepository.findByUsername(user.getUsername());
+		if (present != null) throw new CustomException("아이디가 중복됩니다.");
 		
 		String rawPassword = user.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword); // 비밀번호 암호화

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer { // Web 설정 파일
+public class WebMvcConfig implements WebMvcConfigurer { // Web 설정 파일 (웹과 관련된 처리 및 자동구성된 스프링 MVC 구성에 Formatter , MessageConverter 등을 추가등록할 수 있다)
 
 	@Value("${file.path}")
 	private String uploadFolder;
