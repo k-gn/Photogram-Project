@@ -1,0 +1,27 @@
+# yml 파일은 어떻게 스프링을 만들건지 정의하는 파일
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: utf-8
+      enabled: true
+    
+# 뷰 리졸버
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3307/photogram?serverTimezone=Asia/Seoul
+    username: cos
+    password: cos1234
+    
+  jpa:
+    open-in-view: true # 영속 영역을 프레젠테이션(view)까지 설정
+    hibernate:
+      ddl-auto: update
+      naming: 
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # 변수명으로 컬럼을 만들어 준다.
+    show-sql: true
+      
+
